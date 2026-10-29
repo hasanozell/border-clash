@@ -1,0 +1,2007 @@
+{
+  "100": {
+    "name": "Bulgaria",
+    "tr": "Bulgaristan",
+    "code": "bg",
+    "pop": 6447710,
+    "area": 110879
+  },
+  "104": {
+    "name": "Myanmar",
+    "tr": "Myanmar",
+    "code": "mm",
+    "pop": 54179306,
+    "area": 676578
+  },
+  "108": {
+    "name": "Burundi",
+    "tr": "Burundi",
+    "code": "bi",
+    "pop": 12889576,
+    "area": 27834
+  },
+  "112": {
+    "name": "Belarus",
+    "tr": "Belarus",
+    "code": "by",
+    "pop": 9208000,
+    "area": 207600
+  },
+  "116": {
+    "name": "Cambodia",
+    "tr": "Kamboçya",
+    "code": "kh",
+    "pop": 16767842,
+    "area": 181035
+  },
+  "120": {
+    "name": "Cameroon",
+    "tr": "Kamerun",
+    "code": "cm",
+    "pop": 27914536,
+    "area": 475442
+  },
+  "124": {
+    "name": "Canada",
+    "tr": "Kanada",
+    "code": "ca",
+    "pop": 38929902,
+    "area": 9984670
+  },
+  "132": {
+    "name": "Cape Verde",
+    "tr": "Yeşil Burun Adaları",
+    "code": "cv",
+    "pop": 593149,
+    "area": 4033,
+    "maritime": [
+      "686"
+    ]
+  },
+  "136": {
+    "name": "Cayman Islands",
+    "tr": "Cayman Adaları",
+    "code": "ky",
+    "pop": 68706,
+    "area": 264,
+    "maritime": [
+      "192",
+      "388"
+    ]
+  },
+  "140": {
+    "name": "Central African Rep.",
+    "tr": "Orta Afrika Cum.",
+    "code": "cf",
+    "pop": 5579144,
+    "area": 622984
+  },
+  "144": {
+    "name": "Sri Lanka",
+    "tr": "Sri Lanka",
+    "code": "lk",
+    "pop": 22181000,
+    "area": 65610,
+    "maritime": [
+      "356"
+    ]
+  },
+  "148": {
+    "name": "Chad",
+    "tr": "Çad",
+    "code": "td",
+    "pop": 17723315,
+    "area": 1284000
+  },
+  "152": {
+    "name": "Chile",
+    "tr": "Şili",
+    "code": "cl",
+    "pop": 19603733,
+    "area": 756102
+  },
+  "156": {
+    "name": "China",
+    "tr": "Çin",
+    "code": "cn",
+    "pop": 1411750000,
+    "area": 9596961
+  },
+  "158": {
+    "name": "Taiwan",
+    "tr": "Tayvan",
+    "code": "tw",
+    "pop": 23894000,
+    "area": 36197,
+    "maritime": [
+      "156",
+      "392",
+      "608"
+    ]
+  },
+  "170": {
+    "name": "Colombia",
+    "tr": "Kolombiya",
+    "code": "co",
+    "pop": 51874024,
+    "area": 1141748
+  },
+  "174": {
+    "name": "Comoros",
+    "tr": "Komorlar",
+    "code": "km",
+    "pop": 836774,
+    "area": 2235,
+    "maritime": [
+      "450",
+      "508"
+    ]
+  },
+  "178": {
+    "name": "Congo",
+    "tr": "Kongo",
+    "code": "cg",
+    "pop": 5970424,
+    "area": 342000
+  },
+  "180": {
+    "name": "Dem. Rep. Congo",
+    "tr": "Demokratik Kongo",
+    "code": "cd",
+    "pop": 99010212,
+    "area": 2344858
+  },
+  "184": {
+    "name": "Cook Islands",
+    "tr": "Cook Adaları",
+    "code": "ck",
+    "pop": 17564,
+    "area": 236,
+    "maritime": [
+      "554"
+    ]
+  },
+  "188": {
+    "name": "Costa Rica",
+    "tr": "Kosta Rika",
+    "code": "cr",
+    "pop": 5180829,
+    "area": 51100
+  },
+  "191": {
+    "name": "Croatia",
+    "tr": "Hırvatistan",
+    "code": "hr",
+    "pop": 3855641,
+    "area": 56594
+  },
+  "192": {
+    "name": "Cuba",
+    "tr": "Küba",
+    "code": "cu",
+    "pop": 11212191,
+    "area": 109884,
+    "maritime": [
+      "840",
+      "332",
+      "388"
+    ]
+  },
+  "196": {
+    "name": "Cyprus",
+    "tr": "Kıbrıs",
+    "code": "cy",
+    "pop": 1251488,
+    "area": 9251,
+    "maritime": [
+      "792",
+      "300"
+    ]
+  },
+  "203": {
+    "name": "Czech Republic",
+    "tr": "Çekya",
+    "code": "cz",
+    "pop": 10493986,
+    "area": 78866
+  },
+  "204": {
+    "name": "Benin",
+    "tr": "Benin",
+    "code": "bj",
+    "pop": 13352864,
+    "area": 114763
+  },
+  "208": {
+    "name": "Denmark",
+    "tr": "Danimarka",
+    "code": "dk",
+    "pop": 5903037,
+    "area": 43094,
+    "maritime": [
+      "752",
+      "578"
+    ]
+  },
+  "212": {
+    "name": "Dominica",
+    "tr": "Dominika",
+    "code": "dm",
+    "pop": 72737,
+    "area": 751,
+    "maritime": [
+      "214"
+    ]
+  },
+  "214": {
+    "name": "Dominican Rep.",
+    "tr": "Dominik Cum.",
+    "code": "do",
+    "pop": 11228821,
+    "area": 48671
+  },
+  "218": {
+    "name": "Ecuador",
+    "tr": "Ekvador",
+    "code": "ec",
+    "pop": 18001000,
+    "area": 276841
+  },
+  "222": {
+    "name": "El Salvador",
+    "tr": "El Salvador",
+    "code": "sv",
+    "pop": 6336392,
+    "area": 21041
+  },
+  "226": {
+    "name": "Equatorial Guinea",
+    "tr": "Ekvator Ginesi",
+    "code": "gq",
+    "pop": 1674908,
+    "area": 28051
+  },
+  "231": {
+    "name": "Ethiopia",
+    "tr": "Etiyopya",
+    "code": "et",
+    "pop": 123379924,
+    "area": 1104300
+  },
+  "232": {
+    "name": "Eritrea",
+    "tr": "Eritre",
+    "code": "er",
+    "pop": 3684032,
+    "area": 117600
+  },
+  "233": {
+    "name": "Estonia",
+    "tr": "Estonya",
+    "code": "ee",
+    "pop": 1348840,
+    "area": 45228
+  },
+  "234": {
+    "name": "Faroe Islands",
+    "tr": "Faroe Adaları",
+    "code": "fo",
+    "pop": 53090,
+    "area": 1393,
+    "maritime": [
+      "208",
+      "352",
+      "826"
+    ]
+  },
+  "238": {
+    "name": "Falkland Islands",
+    "tr": "Falkland Adaları",
+    "code": "fk",
+    "pop": 3764,
+    "area": 12173,
+    "maritime": [
+      "032"
+    ]
+  },
+  "239": {
+    "name": "South Georgia",
+    "tr": "Güney Georgia",
+    "code": "gs",
+    "pop": 30,
+    "area": 3903,
+    "maritime": [
+      "238"
+    ]
+  },
+  "242": {
+    "name": "Fiji",
+    "tr": "Fiji",
+    "code": "fj",
+    "pop": 929766,
+    "area": 18274,
+    "maritime": [
+      "554",
+      "036"
+    ]
+  },
+  "246": {
+    "name": "Finland",
+    "tr": "Finlandiya",
+    "code": "fi",
+    "pop": 5556106,
+    "area": 338424
+  },
+  "248": {
+    "name": "Aland Islands",
+    "tr": "Aland Adaları",
+    "code": "ax",
+    "pop": 30344,
+    "area": 1580,
+    "maritime": [
+      "246",
+      "752"
+    ]
+  },
+  "250": {
+    "name": "France",
+    "tr": "Fransa",
+    "code": "fr",
+    "pop": 67971411,
+    "area": 551695,
+    "maritime": [
+      "826"
+    ]
+  },
+  "258": {
+    "name": "French Polynesia",
+    "tr": "Fransız Polinezyası",
+    "code": "pf",
+    "pop": 287000,
+    "area": 4167
+  },
+  "260": {
+    "name": "French South Terr.",
+    "tr": "Fransız Güney Toprakları",
+    "code": "tf",
+    "pop": 400,
+    "area": 7747
+  },
+  "262": {
+    "name": "Djibouti",
+    "tr": "Cibuti",
+    "code": "dj",
+    "pop": 1120849,
+    "area": 23200
+  },
+  "266": {
+    "name": "Gabon",
+    "tr": "Gabon",
+    "code": "ga",
+    "pop": 2388992,
+    "area": 267668
+  },
+  "268": {
+    "name": "Georgia",
+    "tr": "Gürcistan",
+    "code": "ge",
+    "pop": 3712507,
+    "area": 69700
+  },
+  "270": {
+    "name": "Gambia",
+    "tr": "Gambiya",
+    "code": "gm",
+    "pop": 2705992,
+    "area": 11295
+  },
+  "275": {
+    "name": "Palestine",
+    "tr": "Filistin",
+    "code": "ps",
+    "pop": 5043612,
+    "area": 6020,
+    "maritime": [
+      "376",
+      "400",
+      "818"
+    ]
+  },
+  "276": {
+    "name": "Germany",
+    "tr": "Almanya",
+    "code": "de",
+    "pop": 83794000,
+    "area": 357022
+  },
+  "288": {
+    "name": "Ghana",
+    "tr": "Gana",
+    "code": "gh",
+    "pop": 33475870,
+    "area": 238533
+  },
+  "296": {
+    "name": "Kiribati",
+    "tr": "Kiribati",
+    "code": "ki",
+    "pop": 131232,
+    "area": 811
+  },
+  "300": {
+    "name": "Greece",
+    "tr": "Yunanistan",
+    "code": "gr",
+    "pop": 10426917,
+    "area": 131957
+  },
+  "304": {
+    "name": "Greenland",
+    "tr": "Grönland",
+    "code": "gl",
+    "pop": 56583,
+    "area": 2166086,
+    "maritime": [
+      "124",
+      "352"
+    ]
+  },
+  "308": {
+    "name": "Grenada",
+    "tr": "Grenada",
+    "code": "gd",
+    "pop": 125438,
+    "area": 344,
+    "maritime": [
+      "780"
+    ]
+  },
+  "316": {
+    "name": "Guam",
+    "tr": "Guam",
+    "code": "gu",
+    "pop": 153836,
+    "area": 549,
+    "maritime": [
+      "580"
+    ]
+  },
+  "320": {
+    "name": "Guatemala",
+    "tr": "Guatemala",
+    "code": "gt",
+    "pop": 17843908,
+    "area": 108889
+  },
+  "324": {
+    "name": "Guinea",
+    "tr": "Gine",
+    "code": "gn",
+    "pop": 13859341,
+    "area": 245857
+  },
+  "328": {
+    "name": "Guyana",
+    "tr": "Guyana",
+    "code": "gy",
+    "pop": 808726,
+    "area": 214969
+  },
+  "332": {
+    "name": "Haiti",
+    "tr": "Haiti",
+    "code": "ht",
+    "pop": 11584996,
+    "area": 27750
+  },
+  "334": {
+    "name": "Heard & McDonald",
+    "tr": "Heard ve McDonald",
+    "code": "hm",
+    "pop": 10,
+    "area": 372
+  },
+  "336": {
+    "name": "Vatican City",
+    "tr": "Vatikan",
+    "code": "va",
+    "pop": 764,
+    "area": 1,
+    "maritime": [
+      "380"
+    ]
+  },
+  "340": {
+    "name": "Honduras",
+    "tr": "Honduras",
+    "code": "hn",
+    "pop": 10432860,
+    "area": 112492
+  },
+  "344": {
+    "name": "Hong Kong",
+    "tr": "Hong Kong",
+    "code": "hk",
+    "pop": 7413070,
+    "area": 1106,
+    "maritime": [
+      "156"
+    ]
+  },
+  "348": {
+    "name": "Hungary",
+    "tr": "Macaristan",
+    "code": "hu",
+    "pop": 9604000,
+    "area": 93028
+  },
+  "352": {
+    "name": "Iceland",
+    "tr": "İzlanda",
+    "code": "is",
+    "pop": 382003,
+    "area": 103000,
+    "maritime": [
+      "826",
+      "578"
+    ]
+  },
+  "356": {
+    "name": "India",
+    "tr": "Hindistan",
+    "code": "in",
+    "pop": 1417173173,
+    "area": 3287263,
+    "maritime": [
+      "144"
+    ]
+  },
+  "360": {
+    "name": "Indonesia",
+    "tr": "Endonezya",
+    "code": "id",
+    "pop": 275501339,
+    "area": 1904569,
+    "maritime": [
+      "036",
+      "608",
+      "702"
+    ]
+  },
+  "364": {
+    "name": "Iran",
+    "tr": "İran",
+    "code": "ir",
+    "pop": 88550570,
+    "area": 1648195
+  },
+  "368": {
+    "name": "Iraq",
+    "tr": "Irak",
+    "code": "iq",
+    "pop": 44496122,
+    "area": 438317
+  },
+  "372": {
+    "name": "Ireland",
+    "tr": "İrlanda",
+    "code": "ie",
+    "pop": 5086988,
+    "area": 70273,
+    "maritime": [
+      "826"
+    ]
+  },
+  "376": {
+    "name": "Israel",
+    "tr": "İsrail",
+    "code": "il",
+    "pop": 9557500,
+    "area": 20770
+  },
+  "380": {
+    "name": "Italy",
+    "tr": "İtalya",
+    "code": "it",
+    "pop": 58850717,
+    "area": 301340
+  },
+  "384": {
+    "name": "Ivory Coast",
+    "tr": "Fildişi Sahili",
+    "code": "ci",
+    "pop": 28160542,
+    "area": 322463
+  },
+  "388": {
+    "name": "Jamaica",
+    "tr": "Jamaika",
+    "code": "jm",
+    "pop": 2827377,
+    "area": 10991,
+    "maritime": [
+      "192",
+      "332"
+    ]
+  },
+  "392": {
+    "name": "Japan",
+    "tr": "Japonya",
+    "code": "jp",
+    "pop": 125124989,
+    "area": 377975,
+    "maritime": [
+      "410",
+      "643"
+    ]
+  },
+  "398": {
+    "name": "Kazakhstan",
+    "tr": "Kazakistan",
+    "code": "kz",
+    "pop": 19621972,
+    "area": 2724900
+  },
+  "400": {
+    "name": "Jordan",
+    "tr": "Ürdün",
+    "code": "jo",
+    "pop": 11285869,
+    "area": 89342
+  },
+  "404": {
+    "name": "Kenya",
+    "tr": "Kenya",
+    "code": "ke",
+    "pop": 54027487,
+    "area": 580367
+  },
+  "408": {
+    "name": "North Korea",
+    "tr": "Kuzey Kore",
+    "code": "kp",
+    "pop": 26069416,
+    "area": 120538
+  },
+  "410": {
+    "name": "South Korea",
+    "tr": "Güney Kore",
+    "code": "kr",
+    "pop": 51628117,
+    "area": 100210,
+    "maritime": [
+      "392"
+    ]
+  },
+  "414": {
+    "name": "Kuwait",
+    "tr": "Kuveyt",
+    "code": "kw",
+    "pop": 4268873,
+    "area": 17818
+  },
+  "417": {
+    "name": "Kyrgyzstan",
+    "tr": "Kırgızistan",
+    "code": "kg",
+    "pop": 6964000,
+    "area": 199951
+  },
+  "418": {
+    "name": "Laos",
+    "tr": "Laos",
+    "code": "la",
+    "pop": 7529475,
+    "area": 236800
+  },
+  "422": {
+    "name": "Lebanon",
+    "tr": "Lübnan",
+    "code": "lb",
+    "pop": 5489739,
+    "area": 10452
+  },
+  "426": {
+    "name": "Lesotho",
+    "tr": "Lesotho",
+    "code": "ls",
+    "pop": 2305825,
+    "area": 30355
+  },
+  "428": {
+    "name": "Latvia",
+    "tr": "Letonya",
+    "code": "lv",
+    "pop": 1875757,
+    "area": 64589
+  },
+  "430": {
+    "name": "Liberia",
+    "tr": "Liberya",
+    "code": "lr",
+    "pop": 5302681,
+    "area": 111369
+  },
+  "434": {
+    "name": "Libya",
+    "tr": "Libya",
+    "code": "ly",
+    "pop": 6812341,
+    "area": 1759540
+  },
+  "438": {
+    "name": "Liechtenstein",
+    "tr": "Lihtenştayn",
+    "code": "li",
+    "pop": 39327,
+    "area": 160,
+    "maritime": [
+      "040",
+      "756"
+    ]
+  },
+  "440": {
+    "name": "Lithuania",
+    "tr": "Litvanya",
+    "code": "lt",
+    "pop": 2833242,
+    "area": 65300
+  },
+  "442": {
+    "name": "Luxembourg",
+    "tr": "Lüksemburg",
+    "code": "lu",
+    "pop": 653103,
+    "area": 2586
+  },
+  "446": {
+    "name": "Macao",
+    "tr": "Makao",
+    "code": "mo",
+    "pop": 695168,
+    "area": 32,
+    "maritime": [
+      "156"
+    ]
+  },
+  "450": {
+    "name": "Madagascar",
+    "tr": "Madagaskar",
+    "code": "mg",
+    "pop": 29611714,
+    "area": 587041,
+    "maritime": [
+      "508"
+    ]
+  },
+  "454": {
+    "name": "Malawi",
+    "tr": "Malavi",
+    "code": "mw",
+    "pop": 20405317,
+    "area": 118484
+  },
+  "458": {
+    "name": "Malaysia",
+    "tr": "Malezya",
+    "code": "my",
+    "pop": 33938221,
+    "area": 329847
+  },
+  "462": {
+    "name": "Maldives",
+    "tr": "Maldivler",
+    "code": "mv",
+    "pop": 521021,
+    "area": 300,
+    "maritime": [
+      "356",
+      "144"
+    ]
+  },
+  "466": {
+    "name": "Mali",
+    "tr": "Mali",
+    "code": "ml",
+    "pop": 22593590,
+    "area": 1240192
+  },
+  "470": {
+    "name": "Malta",
+    "tr": "Malta",
+    "code": "mt",
+    "pop": 533286,
+    "area": 316,
+    "maritime": [
+      "380",
+      "788"
+    ]
+  },
+  "478": {
+    "name": "Mauritania",
+    "tr": "Moritanya",
+    "code": "mr",
+    "pop": 4736139,
+    "area": 1030700
+  },
+  "480": {
+    "name": "Mauritius",
+    "tr": "Mauritius",
+    "code": "mu",
+    "pop": 1262523,
+    "area": 2040,
+    "maritime": [
+      "450"
+    ]
+  },
+  "484": {
+    "name": "Mexico",
+    "tr": "Meksika",
+    "code": "mx",
+    "pop": 127504125,
+    "area": 1964375
+  },
+  "492": {
+    "name": "Monaco",
+    "tr": "Monako",
+    "code": "mc",
+    "pop": 39520,
+    "area": 2,
+    "maritime": [
+      "250"
+    ]
+  },
+  "496": {
+    "name": "Mongolia",
+    "tr": "Moğolistan",
+    "code": "mn",
+    "pop": 3398366,
+    "area": 1564116
+  },
+  "498": {
+    "name": "Moldova",
+    "tr": "Moldova",
+    "code": "md",
+    "pop": 2538894,
+    "area": 33846
+  },
+  "499": {
+    "name": "Montenegro",
+    "tr": "Karadağ",
+    "code": "me",
+    "pop": 620739,
+    "area": 13812
+  },
+  "500": {
+    "name": "Montserrat",
+    "tr": "Montserrat",
+    "code": "ms",
+    "pop": 4417,
+    "area": 102,
+    "maritime": [
+      "028"
+    ]
+  },
+  "504": {
+    "name": "Morocco",
+    "tr": "Fas",
+    "code": "ma",
+    "pop": 37457971,
+    "area": 446550,
+    "maritime": [
+      "724"
+    ]
+  },
+  "508": {
+    "name": "Mozambique",
+    "tr": "Mozambik",
+    "code": "mz",
+    "pop": 32969518,
+    "area": 801590
+  },
+  "512": {
+    "name": "Oman",
+    "tr": "Umman",
+    "code": "om",
+    "pop": 4576298,
+    "area": 309500
+  },
+  "516": {
+    "name": "Namibia",
+    "tr": "Namibya",
+    "code": "na",
+    "pop": 2567012,
+    "area": 825615
+  },
+  "520": {
+    "name": "Nauru",
+    "tr": "Nauru",
+    "code": "nr",
+    "pop": 12511,
+    "area": 21,
+    "maritime": [
+      "296"
+    ]
+  },
+  "524": {
+    "name": "Nepal",
+    "tr": "Nepal",
+    "code": "np",
+    "pop": 30547580,
+    "area": 147181
+  },
+  "528": {
+    "name": "Netherlands",
+    "tr": "Hollanda",
+    "code": "nl",
+    "pop": 17700982,
+    "area": 41850
+  },
+  "531": {
+    "name": "Curacao",
+    "tr": "Curaçao",
+    "code": "cw",
+    "pop": 152369,
+    "area": 444,
+    "maritime": [
+      "862"
+    ]
+  },
+  "533": {
+    "name": "Aruba",
+    "tr": "Aruba",
+    "code": "aw",
+    "pop": 106445,
+    "area": 180,
+    "maritime": [
+      "862"
+    ]
+  },
+  "534": {
+    "name": "Sint Maarten",
+    "tr": "Sint Maarten",
+    "code": "sx",
+    "pop": 42848,
+    "area": 34,
+    "maritime": [
+      "663"
+    ]
+  },
+  "540": {
+    "name": "New Caledonia",
+    "tr": "Yeni Kaledonya",
+    "code": "nc",
+    "pop": 271407,
+    "area": 18575,
+    "maritime": [
+      "548",
+      "036"
+    ]
+  },
+  "548": {
+    "name": "Vanuatu",
+    "tr": "Vanuatu",
+    "code": "vu",
+    "pop": 326740,
+    "area": 12189,
+    "maritime": [
+      "090",
+      "242"
+    ]
+  },
+  "554": {
+    "name": "New Zealand",
+    "tr": "Yeni Zelanda",
+    "code": "nz",
+    "pop": 5124100,
+    "area": 268021,
+    "maritime": [
+      "036"
+    ]
+  },
+  "558": {
+    "name": "Nicaragua",
+    "tr": "Nikaragua",
+    "code": "ni",
+    "pop": 6948392,
+    "area": 130373
+  },
+  "562": {
+    "name": "Niger",
+    "tr": "Nijer",
+    "code": "ne",
+    "pop": 26207977,
+    "area": 1267000
+  },
+  "566": {
+    "name": "Nigeria",
+    "tr": "Nijerya",
+    "code": "ng",
+    "pop": 218541212,
+    "area": 923768
+  },
+  "570": {
+    "name": "Niue",
+    "tr": "Niue",
+    "code": "nu",
+    "pop": 1937,
+    "area": 260,
+    "maritime": [
+      "776"
+    ]
+  },
+  "574": {
+    "name": "Norfolk Island",
+    "tr": "Norfolk Adası",
+    "code": "nf",
+    "pop": 2188,
+    "area": 36,
+    "maritime": [
+      "036",
+      "554"
+    ]
+  },
+  "578": {
+    "name": "Norway",
+    "tr": "Norveç",
+    "code": "no",
+    "pop": 5434319,
+    "area": 385207
+  },
+  "580": {
+    "name": "Northern Mariana",
+    "tr": "Kuzey Mariana",
+    "code": "mp",
+    "pop": 49551,
+    "area": 464,
+    "maritime": [
+      "316"
+    ]
+  },
+  "583": {
+    "name": "Micronesia",
+    "tr": "Mikronezya",
+    "code": "fm",
+    "pop": 114164,
+    "area": 702,
+    "maritime": [
+      "584",
+      "585"
+    ]
+  },
+  "584": {
+    "name": "Marshall Islands",
+    "tr": "Marshall Adaları",
+    "code": "mh",
+    "pop": 41569,
+    "area": 181,
+    "maritime": [
+      "583"
+    ]
+  },
+  "585": {
+    "name": "Palau",
+    "tr": "Palau",
+    "code": "pw",
+    "pop": 18055,
+    "area": 459,
+    "maritime": [
+      "608",
+      "360"
+    ]
+  },
+  "586": {
+    "name": "Pakistan",
+    "tr": "Pakistan",
+    "code": "pk",
+    "pop": 235824862,
+    "area": 881913
+  },
+  "591": {
+    "name": "Panama",
+    "tr": "Panama",
+    "code": "pa",
+    "pop": 4246439,
+    "area": 75417
+  },
+  "598": {
+    "name": "Papua New Guinea",
+    "tr": "Papua Yeni Gine",
+    "code": "pg",
+    "pop": 10142619,
+    "area": 462840
+  },
+  "600": {
+    "name": "Paraguay",
+    "tr": "Paraguay",
+    "code": "py",
+    "pop": 6780744,
+    "area": 406752
+  },
+  "604": {
+    "name": "Peru",
+    "tr": "Peru",
+    "code": "pe",
+    "pop": 34049588,
+    "area": 1285216
+  },
+  "608": {
+    "name": "Philippines",
+    "tr": "Filipinler",
+    "code": "ph",
+    "pop": 115559003,
+    "area": 300000,
+    "maritime": [
+      "360",
+      "158",
+      "458"
+    ]
+  },
+  "612": {
+    "name": "Pitcairn",
+    "tr": "Pitcairn",
+    "code": "pn",
+    "pop": 47,
+    "area": 47
+  },
+  "616": {
+    "name": "Poland",
+    "tr": "Polonya",
+    "code": "pl",
+    "pop": 37561599,
+    "area": 312696
+  },
+  "620": {
+    "name": "Portugal",
+    "tr": "Portekiz",
+    "code": "pt",
+    "pop": 10467366,
+    "area": 92212
+  },
+  "624": {
+    "name": "Guinea-Bissau",
+    "tr": "Gine-Bissau",
+    "code": "gw",
+    "pop": 2105566,
+    "area": 36125
+  },
+  "626": {
+    "name": "Timor-Leste",
+    "tr": "Doğu Timor",
+    "code": "tl",
+    "pop": 1341296,
+    "area": 14874,
+    "maritime": [
+      "360",
+      "036"
+    ]
+  },
+  "630": {
+    "name": "Puerto Rico",
+    "tr": "Porto Riko",
+    "code": "pr",
+    "pop": 3221789,
+    "area": 9104,
+    "maritime": [
+      "214",
+      "850"
+    ]
+  },
+  "634": {
+    "name": "Qatar",
+    "tr": "Katar",
+    "code": "qa",
+    "pop": 2695122,
+    "area": 11586
+  },
+  "642": {
+    "name": "Romania",
+    "tr": "Romanya",
+    "code": "ro",
+    "pop": 19047009,
+    "area": 238391
+  },
+  "643": {
+    "name": "Russia",
+    "tr": "Rusya",
+    "code": "ru",
+    "pop": 144236933,
+    "area": 17098242
+  },
+  "646": {
+    "name": "Rwanda",
+    "tr": "Ruanda",
+    "code": "rw",
+    "pop": 13776602,
+    "area": 26338
+  },
+  "652": {
+    "name": "Saint Barthelemy",
+    "tr": "Saint Barthelemy",
+    "code": "bl",
+    "pop": 10861,
+    "area": 25,
+    "maritime": [
+      "663"
+    ]
+  },
+  "654": {
+    "name": "Saint Helena",
+    "tr": "Saint Helena",
+    "code": "sh",
+    "pop": 5396,
+    "area": 394
+  },
+  "659": {
+    "name": "St. Kitts and Nevis",
+    "tr": "Saint Kitts ve Nevis",
+    "code": "kn",
+    "pop": 47658,
+    "area": 261,
+    "maritime": [
+      "028"
+    ]
+  },
+  "660": {
+    "name": "Anguilla",
+    "tr": "Anguilla",
+    "code": "ai",
+    "pop": 15753,
+    "area": 91,
+    "maritime": [
+      "663"
+    ]
+  },
+  "662": {
+    "name": "Saint Lucia",
+    "tr": "Saint Lucia",
+    "code": "lc",
+    "pop": 179857,
+    "area": 616,
+    "maritime": [
+      "670"
+    ]
+  },
+  "663": {
+    "name": "Saint Martin",
+    "tr": "Saint Martin",
+    "code": "mf",
+    "pop": 32489,
+    "area": 53,
+    "maritime": [
+      "534"
+    ]
+  },
+  "666": {
+    "name": "St. Pierre & Miquelon",
+    "tr": "Saint Pierre ve Miquelon",
+    "code": "pm",
+    "pop": 5883,
+    "area": 242,
+    "maritime": [
+      "124"
+    ]
+  },
+  "670": {
+    "name": "St. Vincent & Gren.",
+    "tr": "St. Vincent ve Grenadinler",
+    "code": "vc",
+    "pop": 103948,
+    "area": 389,
+    "maritime": [
+      "662",
+      "308"
+    ]
+  },
+  "674": {
+    "name": "San Marino",
+    "tr": "San Marino",
+    "code": "sm",
+    "pop": 33660,
+    "area": 61,
+    "maritime": [
+      "380"
+    ]
+  },
+  "678": {
+    "name": "Sao Tome & Principe",
+    "tr": "Sao Tome ve Principe",
+    "code": "st",
+    "pop": 227380,
+    "area": 964,
+    "maritime": [
+      "226",
+      "266"
+    ]
+  },
+  "682": {
+    "name": "Saudi Arabia",
+    "tr": "Suudi Arabistan",
+    "code": "sa",
+    "pop": 36408820,
+    "area": 2149690
+  },
+  "686": {
+    "name": "Senegal",
+    "tr": "Senegal",
+    "code": "sn",
+    "pop": 17316449,
+    "area": 196722
+  },
+  "688": {
+    "name": "Serbia",
+    "tr": "Sırbistan",
+    "code": "rs",
+    "pop": 6664449,
+    "area": 77474
+  },
+  "690": {
+    "name": "Seychelles",
+    "tr": "Seyşeller",
+    "code": "sc",
+    "pop": 107122,
+    "area": 452,
+    "maritime": [
+      "450"
+    ]
+  },
+  "694": {
+    "name": "Sierra Leone",
+    "tr": "Sierra Leone",
+    "code": "sl",
+    "pop": 8605718,
+    "area": 71740
+  },
+  "702": {
+    "name": "Singapore",
+    "tr": "Singapur",
+    "code": "sg",
+    "pop": 5637000,
+    "area": 728,
+    "maritime": [
+      "458",
+      "360"
+    ]
+  },
+  "703": {
+    "name": "Slovakia",
+    "tr": "Slovakya",
+    "code": "sk",
+    "pop": 5431752,
+    "area": 49035
+  },
+  "704": {
+    "name": "Vietnam",
+    "tr": "Vietnam",
+    "code": "vn",
+    "pop": 98186856,
+    "area": 331212
+  },
+  "705": {
+    "name": "Slovenia",
+    "tr": "Slovenya",
+    "code": "si",
+    "pop": 2111661,
+    "area": 20273
+  },
+  "706": {
+    "name": "Somalia",
+    "tr": "Somali",
+    "code": "so",
+    "pop": 17597511,
+    "area": 637657
+  },
+  "710": {
+    "name": "South Africa",
+    "tr": "Güney Afrika",
+    "code": "za",
+    "pop": 59893885,
+    "area": 1221037
+  },
+  "716": {
+    "name": "Zimbabwe",
+    "tr": "Zimbabve",
+    "code": "zw",
+    "pop": 16320537,
+    "area": 390757
+  },
+  "724": {
+    "name": "Spain",
+    "tr": "İspanya",
+    "code": "es",
+    "pop": 47778340,
+    "area": 505990
+  },
+  "728": {
+    "name": "South Sudan",
+    "tr": "Güney Sudan",
+    "code": "ss",
+    "pop": 10913164,
+    "area": 619745
+  },
+  "729": {
+    "name": "Sudan",
+    "tr": "Sudan",
+    "code": "sd",
+    "pop": 46874204,
+    "area": 1861484
+  },
+  "732": {
+    "name": "Western Sahara",
+    "tr": "Batı Sahra",
+    "code": "eh",
+    "pop": 597339,
+    "area": 266000,
+    "maritime": [
+      "504",
+      "478"
+    ]
+  },
+  "740": {
+    "name": "Suriname",
+    "tr": "Surinam",
+    "code": "sr",
+    "pop": 618040,
+    "area": 163820
+  },
+  "748": {
+    "name": "Eswatini",
+    "tr": "Esvatini",
+    "code": "sz",
+    "pop": 1201670,
+    "area": 17364,
+    "maritime": [
+      "710",
+      "508"
+    ]
+  },
+  "752": {
+    "name": "Sweden",
+    "tr": "İsveç",
+    "code": "se",
+    "pop": 10486941,
+    "area": 450295
+  },
+  "756": {
+    "name": "Switzerland",
+    "tr": "İsviçre",
+    "code": "ch",
+    "pop": 8740472,
+    "area": 41285
+  },
+  "760": {
+    "name": "Syria",
+    "tr": "Suriye",
+    "code": "sy",
+    "pop": 22125249,
+    "area": 185180
+  },
+  "762": {
+    "name": "Tajikistan",
+    "tr": "Tacikistan",
+    "code": "tj",
+    "pop": 9952787,
+    "area": 143100
+  },
+  "764": {
+    "name": "Thailand",
+    "tr": "Tayland",
+    "code": "th",
+    "pop": 71697030,
+    "area": 513120
+  },
+  "768": {
+    "name": "Togo",
+    "tr": "Togo",
+    "code": "tg",
+    "pop": 8848699,
+    "area": 56785
+  },
+  "776": {
+    "name": "Tonga",
+    "tr": "Tonga",
+    "code": "to",
+    "pop": 106858,
+    "area": 747,
+    "maritime": [
+      "242",
+      "882"
+    ]
+  },
+  "780": {
+    "name": "Trinidad and Tobago",
+    "tr": "Trinidad ve Tobago",
+    "code": "tt",
+    "pop": 1531044,
+    "area": 5128,
+    "maritime": [
+      "862",
+      "308"
+    ]
+  },
+  "784": {
+    "name": "United Arab Emirates",
+    "tr": "Birleşik Arap Emirlikleri",
+    "code": "ae",
+    "pop": 9441129,
+    "area": 83600
+  },
+  "788": {
+    "name": "Tunisia",
+    "tr": "Tunus",
+    "code": "tn",
+    "pop": 12356117,
+    "area": 163610,
+    "maritime": [
+      "380"
+    ]
+  },
+  "792": {
+    "name": "Turkey",
+    "tr": "Türkiye",
+    "code": "tr",
+    "pop": 85279553,
+    "area": 783562
+  },
+  "795": {
+    "name": "Turkmenistan",
+    "tr": "Türkmenistan",
+    "code": "tm",
+    "pop": 6430770,
+    "area": 488100
+  },
+  "796": {
+    "name": "Turks & Caicos",
+    "tr": "Turks ve Caicos",
+    "code": "tc",
+    "pop": 45703,
+    "area": 948,
+    "maritime": [
+      "044",
+      "332"
+    ]
+  },
+  "800": {
+    "name": "Uganda",
+    "tr": "Uganda",
+    "code": "ug",
+    "pop": 47249585,
+    "area": 241550
+  },
+  "804": {
+    "name": "Ukraine",
+    "tr": "Ukrayna",
+    "code": "ua",
+    "pop": 38000000,
+    "area": 603500
+  },
+  "807": {
+    "name": "North Macedonia",
+    "tr": "Kuzey Makedonya",
+    "code": "mk",
+    "pop": 1836713,
+    "area": 25713
+  },
+  "818": {
+    "name": "Egypt",
+    "tr": "Mısır",
+    "code": "eg",
+    "pop": 110990103,
+    "area": 1002450
+  },
+  "826": {
+    "name": "United Kingdom",
+    "tr": "Birleşik Krallık",
+    "code": "gb",
+    "pop": 67508936,
+    "area": 242495,
+    "maritime": [
+      "372",
+      "250",
+      "056"
+    ]
+  },
+  "831": {
+    "name": "Guernsey",
+    "tr": "Guernsey",
+    "code": "gg",
+    "pop": 63463,
+    "area": 78,
+    "maritime": [
+      "826",
+      "250"
+    ]
+  },
+  "832": {
+    "name": "Jersey",
+    "tr": "Jersey",
+    "code": "je",
+    "pop": 103267,
+    "area": 118,
+    "maritime": [
+      "826",
+      "250"
+    ]
+  },
+  "833": {
+    "name": "Isle of Man",
+    "tr": "Man Adası",
+    "code": "im",
+    "pop": 84069,
+    "area": 572,
+    "maritime": [
+      "826",
+      "372"
+    ]
+  },
+  "834": {
+    "name": "Tanzania",
+    "tr": "Tanzanya",
+    "code": "tz",
+    "pop": 65497748,
+    "area": 947303
+  },
+  "840": {
+    "name": "United States",
+    "tr": "Amerika Birleşik Devletleri",
+    "code": "us",
+    "pop": 333287557,
+    "area": 9833517
+  },
+  "850": {
+    "name": "US Virgin Islands",
+    "tr": "ABD Virjin Adaları",
+    "code": "vi",
+    "pop": 87146,
+    "area": 346,
+    "maritime": [
+      "630",
+      "092"
+    ]
+  },
+  "854": {
+    "name": "Burkina Faso",
+    "tr": "Burkina Faso",
+    "code": "bf",
+    "pop": 22673762,
+    "area": 274200
+  },
+  "858": {
+    "name": "Uruguay",
+    "tr": "Uruguay",
+    "code": "uy",
+    "pop": 3422794,
+    "area": 176215
+  },
+  "860": {
+    "name": "Uzbekistan",
+    "tr": "Özbekistan",
+    "code": "uz",
+    "pop": 35648100,
+    "area": 447400
+  },
+  "862": {
+    "name": "Venezuela",
+    "tr": "Venezuela",
+    "code": "ve",
+    "pop": 28301696,
+    "area": 916445
+  },
+  "876": {
+    "name": "Wallis & Futuna",
+    "tr": "Wallis ve Futuna",
+    "code": "wf",
+    "pop": 11558,
+    "area": 142,
+    "maritime": [
+      "242",
+      "882"
+    ]
+  },
+  "882": {
+    "name": "Samoa",
+    "tr": "Samoa",
+    "code": "ws",
+    "pop": 222382,
+    "area": 2842,
+    "maritime": [
+      "016",
+      "776"
+    ]
+  },
+  "887": {
+    "name": "Yemen",
+    "tr": "Yemen",
+    "code": "ye",
+    "pop": 33696614,
+    "area": 527968
+  },
+  "894": {
+    "name": "Zambia",
+    "tr": "Zambiya",
+    "code": "zm",
+    "pop": 20017675,
+    "area": 752618
+  },
+  "901": {
+    "name": "Somaliland",
+    "tr": "Somaliland",
+    "code": "so",
+    "pop": 5700000,
+    "area": 176120,
+    "maritime": [
+      "706",
+      "231"
+    ]
+  },
+  "902": {
+    "name": "Kosovo",
+    "tr": "Kosova",
+    "code": "xk",
+    "pop": 1761985,
+    "area": 10887,
+    "maritime": [
+      "688",
+      "807",
+      "008",
+      "499"
+    ]
+  },
+  "903": {
+    "name": "Northern Cyprus",
+    "tr": "Kuzey Kıbrıs",
+    "code": "tr",
+    "pop": 382836,
+    "area": 3355,
+    "maritime": [
+      "196",
+      "792"
+    ]
+  },
+  "905": {
+    "name": "Siachen Glacier",
+    "tr": "Siachen Buzulu",
+    "code": "in",
+    "pop": 100,
+    "area": 700
+  },
+  "004": {
+    "name": "Afghanistan",
+    "tr": "Afganistan",
+    "code": "af",
+    "pop": 41128771,
+    "area": 652864
+  },
+  "008": {
+    "name": "Albania",
+    "tr": "Arnavutluk",
+    "code": "al",
+    "pop": 2777689,
+    "area": 28748
+  },
+  "012": {
+    "name": "Algeria",
+    "tr": "Cezayir",
+    "code": "dz",
+    "pop": 44903225,
+    "area": 2381741
+  },
+  "024": {
+    "name": "Angola",
+    "tr": "Angola",
+    "code": "ao",
+    "pop": 35588987,
+    "area": 1246700
+  },
+  "032": {
+    "name": "Argentina",
+    "tr": "Arjantin",
+    "code": "ar",
+    "pop": 46234830,
+    "area": 2780400
+  },
+  "051": {
+    "name": "Armenia",
+    "tr": "Ermenistan",
+    "code": "am",
+    "pop": 2780469,
+    "area": 29743
+  },
+  "036": {
+    "name": "Australia",
+    "tr": "Avustralya",
+    "code": "au",
+    "pop": 26005540,
+    "area": 7692024,
+    "maritime": [
+      "360",
+      "554",
+      "598"
+    ]
+  },
+  "040": {
+    "name": "Austria",
+    "tr": "Avusturya",
+    "code": "at",
+    "pop": 9042528,
+    "area": 83871
+  },
+  "031": {
+    "name": "Azerbaijan",
+    "tr": "Azerbaycan",
+    "code": "az",
+    "pop": 10141756,
+    "area": 86600
+  },
+  "050": {
+    "name": "Bangladesh",
+    "tr": "Bangladeş",
+    "code": "bd",
+    "pop": 171186372,
+    "area": 147570
+  },
+  "056": {
+    "name": "Belgium",
+    "tr": "Belçika",
+    "code": "be",
+    "pop": 11685814,
+    "area": 30528
+  },
+  "084": {
+    "name": "Belize",
+    "tr": "Belize",
+    "code": "bz",
+    "pop": 405272,
+    "area": 22966
+  },
+  "064": {
+    "name": "Bhutan",
+    "tr": "Butan",
+    "code": "bt",
+    "pop": 782455,
+    "area": 38394
+  },
+  "068": {
+    "name": "Bolivia",
+    "tr": "Bolivya",
+    "code": "bo",
+    "pop": 12224110,
+    "area": 1098581
+  },
+  "070": {
+    "name": "Bosnia and Herz.",
+    "tr": "Bosna Hersek",
+    "code": "ba",
+    "pop": 3233526,
+    "area": 51209
+  },
+  "072": {
+    "name": "Botswana",
+    "tr": "Botsvana",
+    "code": "bw",
+    "pop": 2630296,
+    "area": 581730
+  },
+  "076": {
+    "name": "Brazil",
+    "tr": "Brezilya",
+    "code": "br",
+    "pop": 215313498,
+    "area": 8515767
+  },
+  "096": {
+    "name": "Brunei",
+    "tr": "Brunei",
+    "code": "bn",
+    "pop": 449002,
+    "area": 5765
+  },
+  "010": {
+    "name": "Antarctica",
+    "tr": "Antarktika",
+    "code": "aq",
+    "pop": 1000,
+    "area": 14200000
+  },
+  "016": {
+    "name": "American Samoa",
+    "tr": "Amerikan Samoası",
+    "code": "as",
+    "pop": 49710,
+    "area": 199,
+    "maritime": [
+      "882"
+    ]
+  },
+  "020": {
+    "name": "Andorra",
+    "tr": "Andorra",
+    "code": "ad",
+    "pop": 79824,
+    "area": 468,
+    "maritime": [
+      "250",
+      "724"
+    ]
+  },
+  "028": {
+    "name": "Antigua and Barbuda",
+    "tr": "Antigua ve Barbuda",
+    "code": "ag",
+    "pop": 93763,
+    "area": 442,
+    "maritime": [
+      "659"
+    ]
+  },
+  "044": {
+    "name": "Bahamas",
+    "tr": "Bahamalar",
+    "code": "bs",
+    "pop": 409984,
+    "area": 13943,
+    "maritime": [
+      "840",
+      "192"
+    ]
+  },
+  "048": {
+    "name": "Bahrain",
+    "tr": "Bahreyn",
+    "code": "bh",
+    "pop": 1472233,
+    "area": 765,
+    "maritime": [
+      "682",
+      "634"
+    ]
+  },
+  "052": {
+    "name": "Barbados",
+    "tr": "Barbados",
+    "code": "bb",
+    "pop": 281635,
+    "area": 430,
+    "maritime": [
+      "670"
+    ]
+  },
+  "060": {
+    "name": "Bermuda",
+    "tr": "Bermuda",
+    "code": "bm",
+    "pop": 63532,
+    "area": 54,
+    "maritime": [
+      "840"
+    ]
+  },
+  "086": {
+    "name": "Indian Ocean Ter.",
+    "tr": "Hint Okyanusu",
+    "code": "io",
+    "pop": 3000,
+    "area": 60
+  },
+  "090": {
+    "name": "Solomon Islands",
+    "tr": "Solomon Adaları",
+    "code": "sb",
+    "pop": 724273,
+    "area": 28896,
+    "maritime": [
+      "598",
+      "548"
+    ]
+  },
+  "092": {
+    "name": "British Virgin Is.",
+    "tr": "Britanya Virjin Adaları",
+    "code": "vg",
+    "pop": 31305,
+    "area": 151,
+    "maritime": [
+      "850"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { Globe, Swords, Trophy, Bookmark, Check } from 'lucide-react';
+import { Globe, Swords, Trophy, Bookmark, Check, Play, RotateCcw } from 'lucide-react';
 
 import MapViewer from './components/MapViewer';
 import BattleCard from './components/BattleCard';
@@ -16,25 +16,28 @@ import { sound } from './utils/sound';
 const STORAGE_KEY = 'border_clash_save_v1';
 
 export default function App() {
-  // Load saved campaign or initialize fresh state
-  const initializeState = useCallback(() => {
+  // Check for saved campaign on initial load
+  const loadSavedData = () => {
     try {
-      const savedData = localStorage.getItem(STORAGE_KEY);
-      if (savedData) {
-        const parsed = JSON.parse(savedData);
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
         if (parsed.factions && parsed.conquestMap && Object.keys(parsed.factions).length > 0) {
           return {
             factions: parsed.factions,
             conquestMap: parsed.conquestMap,
             episode: parsed.episode || 1,
-            isResumed: true
+            hasSaved: true
           };
         }
       }
-    } catch (err) {
-      console.warn('Failed to load saved state, using default:', err);
+    } catch (e) {
+      console.warn('Failed to load save:', e);
     }
+    return null;
+  };
 
+  const createInitialFactions = () => {
     const initFactions = {};
     const initConquest = {};
 
@@ -54,17 +57,19 @@ export default function App() {
       };
     });
 
-    return { factions: initFactions, conquestMap: initConquest, episode: 1, isResumed: false };
-  }, []);
+    return { factions: initFactions, conquestMap: initConquest, episode: 1, hasSaved: false };
+  };
 
-  const [initialData] = useState(initializeState);
+  const savedData = loadSavedData();
+  const initialData = savedData || createInitialFactions();
+
   const [{ factions, conquestMap }, setGameState] = useState({
     factions: initialData.factions,
     conquestMap: initialData.conquestMap
   });
-  const [episode, setEpisode] = useState(initialData.episode || 1);
-  const [isResumedBanner, setIsResumedBanner] = useState(initialData.isResumed);
-  const [isSavedJustNow, setIsSavedJustNow] = useState(false);
+  const [episode, setEpisode] = useState(initialData.episode);
+  const [showResumeModal, setShowResumeModal] = useState(Boolean(savedData && savedData.episode > 1));
+  const [saveToast, setSaveToast] = useState('');
 
   // Flow State Machine:
   // 'idle' -> 'country_selected' -> 'cycling_neighbors' -> 'defender_chosen' -> 'rolling_1' -> 'rolling_2' -> 'rolling_3' -> 'multiplier' -> 'winner'
@@ -104,8 +109,8 @@ export default function App() {
 
   const remainingCount = Object.keys(factions).length;
 
-  // Save campaign helper
-  const saveCampaign = useCallback((facs, map, ep) => {
+  // Auto-Save / Manual Save helper
+  const saveCampaign = useCallback((facs, map, ep, isManual = false) => {
     try {
       localStorage.setItem(
         STORAGE_KEY,
@@ -116,15 +121,15 @@ export default function App() {
           timestamp: Date.now()
         })
       );
-      setIsSavedJustNow(true);
-      setTimeout(() => setIsSavedJustNow(false), 2000);
+      setSaveToast(isManual ? 'Campaign saved successfully! 💾' : `Autosaved (Ep #${ep}) 💾`);
+      setTimeout(() => setSaveToast(''), 2200);
     } catch (err) {
       console.error('Failed to save campaign:', err);
     }
   }, []);
 
   const handleManualSave = () => {
-    saveCampaign(factions, conquestMap, episode);
+    saveCampaign(factions, conquestMap, episode, true);
   };
 
   const getForeignNeighbors = useCallback((aId, currentFactions, currentConquest) => {
@@ -450,7 +455,7 @@ export default function App() {
 
     // Auto-save the campaign after every clash!
     if (nextFactions && nextConquest) {
-      saveCampaign(nextFactions, nextConquest, nextEpisode);
+      saveCampaign(nextFactions, nextConquest, nextEpisode, false);
     }
 
     setViewMode('world');
@@ -490,28 +495,10 @@ export default function App() {
       localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
 
-    const initFactions = {};
-    const initConquest = {};
-
-    Object.entries(countryMetadata).forEach(([id, meta]) => {
-      const normId = String(id).padStart(3, '0');
-      initConquest[normId] = normId;
-      initFactions[normId] = {
-        id: normId,
-        name: meta.name,
-        code: meta.code,
-        territories: [normId],
-        population: meta.pop || 1000000,
-        area: meta.area || 10000,
-        wins: 0,
-        losses: 0,
-        multiplier: calculateMultiplier(meta.pop || 1000000)
-      };
-    });
-
-    setGameState({ factions: initFactions, conquestMap: initConquest });
+    const fresh = createInitialFactions();
+    setGameState({ factions: fresh.factions, conquestMap: fresh.conquestMap });
     setEpisode(1);
-    setIsResumedBanner(false);
+    setShowResumeModal(false);
     setAttackerId(null);
     setDefenderId(null);
     setCandidateNeighbors([]);
@@ -524,6 +511,8 @@ export default function App() {
     setFinalAttackerPoints(0);
     setFinalDefenderPoints(0);
     setWinner(null);
+    setSaveToast('Simulation reset to initial 239 countries! 🔄');
+    setTimeout(() => setSaveToast(''), 2500);
   };
 
   const handleToggleMute = () => {
@@ -548,8 +537,8 @@ export default function App() {
   const defenderFaction = defenderId ? factions[defenderId] : null;
 
   return (
-    <div className="h-[100dvh] max-h-[100dvh] w-full bg-[#07090e] text-white flex flex-col justify-between p-1.5 sm:p-3 select-none font-sans overflow-hidden">
-      {/* Top Header (Ultra sleek & compact) */}
+    <div className="fixed inset-0 w-full h-full bg-[#07090e] text-white flex flex-col justify-between p-1.5 sm:p-3 select-none font-sans overflow-hidden">
+      {/* Top Header (Ultra sleek & compact, exactly 30px) */}
       <header className="flex-shrink-0 w-full max-w-5xl mx-auto flex items-center justify-between gap-1 pb-1 border-b border-slate-800/80">
         <div className="flex items-center gap-1.5">
           <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center text-slate-950 font-black flex-shrink-0 shadow-sm">
@@ -564,19 +553,15 @@ export default function App() {
 
         {/* Global Stats Badges */}
         <div className="flex items-center gap-1 sm:gap-1.5">
-          {isResumedBanner && (
-            <div className="hidden xs:flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/60 border border-emerald-500/40 text-[9px] font-bold text-emerald-300">
-              <Check className="w-2.5 h-2.5" />
-              <span>Resumed</span>
-            </div>
-          )}
-
-          {isSavedJustNow && (
-            <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-[9px] font-bold text-emerald-300 animate-pulse">
-              <Bookmark className="w-2.5 h-2.5" />
-              <span>Saved!</span>
-            </div>
-          )}
+          {/* Prominent Quick Save Button */}
+          <button
+            onClick={handleManualSave}
+            className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-[10px] font-bold text-amber-300 transition active:scale-95"
+            title="Save campaign progress"
+          >
+            <Bookmark className="w-3 h-3 text-amber-400" />
+            <span>Save</span>
+          </button>
 
           <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-[10px] font-bold">
             <Globe className="w-2.5 h-2.5 text-sky-400" />
@@ -589,6 +574,14 @@ export default function App() {
           </div>
         </div>
       </header>
+
+      {/* Floating Save Notification Toast */}
+      {saveToast && (
+        <div className="fixed top-11 left-1/2 -translate-x-1/2 z-50 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-xs shadow-2xl flex items-center gap-1.5 animate-bounce">
+          <Check className="w-3.5 h-3.5 stroke-[3]" />
+          <span>{saveToast}</span>
+        </div>
+      )}
 
       {/* Main Content Area (Auto-fits 100% viewport, NO scrolling) */}
       <main className={`flex-1 min-h-0 w-full mx-auto my-1 flex flex-col items-center justify-between overflow-hidden ${
@@ -699,7 +692,7 @@ export default function App() {
           onTogglePlay={handleTogglePlay}
           onReset={handleReset}
           onSave={handleManualSave}
-          isSavedJustNow={isSavedJustNow}
+          isSavedJustNow={Boolean(saveToast)}
           speed={speed}
           onChangeSpeed={handleChangeSpeed}
           isMuted={isMuted}
@@ -720,6 +713,39 @@ export default function App() {
         borderGraph={borderGraph}
         onStartCustomMatch={handleStartCustomMatch}
       />
+
+      {/* Resume Campaign Popup Modal (Explicit Save/Resume Choice) */}
+      {showResumeModal && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 w-full max-w-xs text-center shadow-2xl animate-fade-in">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mx-auto mb-3">
+              <Bookmark className="w-6 h-6" />
+            </div>
+            <h3 className="text-base font-black text-white mb-1">
+              Resume Saved Campaign?
+            </h3>
+            <p className="text-xs text-slate-300 mb-4">
+              Saved simulation found at <strong className="text-amber-400">Episode #{episode}</strong> with <strong className="text-sky-400">{remainingCount} empires left</strong>.
+            </p>
+            <div className="space-y-2">
+              <button
+                onClick={() => setShowResumeModal(false)}
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 hover:from-emerald-300 hover:to-emerald-500 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/20 active:scale-98 transition"
+              >
+                <Play className="w-3.5 h-3.5 fill-slate-950" />
+                <span>Continue Campaign</span>
+              </button>
+              <button
+                onClick={handleReset}
+                className="w-full py-2 rounded-xl bg-slate-800 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 text-xs font-bold transition flex items-center justify-center gap-1"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset & Start New World</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

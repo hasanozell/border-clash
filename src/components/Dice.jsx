@@ -10,24 +10,26 @@ const PIP_COORDS = {
   6: [{ row: 1, col: 1 }, { row: 1, col: 3 }, { row: 2, col: 1 }, { row: 2, col: 3 }, { row: 3, col: 1 }, { row: 3, col: 3 }],
 };
 
-export default function Dice({ value, isRolling, isWinner, isLoser, isPending, size = "md" }) {
+export default function Dice({ value, isRolling, isWinner, isLoser, isPending, size = "sm" }) {
   const pips = (value && PIP_COORDS[value]) ? PIP_COORDS[value] : [];
 
   const sizeClasses = {
-    sm: "w-9 h-9 p-1.5 rounded-lg",
-    md: "w-12 h-12 p-2 rounded-xl",
+    xs: "w-7 h-7 p-1 rounded-lg",
+    sm: "w-8 h-8 p-1.5 rounded-lg",
+    md: "w-11 h-11 p-2 rounded-xl",
     lg: "w-14 h-14 p-2.5 rounded-2xl"
-  }[size] || "w-12 h-12 p-2 rounded-xl";
+  }[size] || "w-8 h-8 p-1.5 rounded-lg";
 
   const pipSize = {
+    xs: "w-1.5 h-1.5",
     sm: "w-1.5 h-1.5",
     md: "w-2 h-2",
     lg: "w-2.5 h-2.5"
-  }[size] || "w-2 h-2";
+  }[size] || "w-1.5 h-1.5";
 
   if (isPending) {
     return (
-      <div className={`${sizeClasses} flex items-center justify-center bg-slate-800/80 border border-slate-700/80 rounded-xl text-slate-500 font-bold text-sm shadow-inner select-none`}>
+      <div className={`${sizeClasses} flex items-center justify-center bg-slate-850/80 border border-slate-700/80 rounded-lg text-slate-500 font-bold text-xs shadow-inner select-none`}>
         🎲
       </div>
     );
@@ -35,21 +37,21 @@ export default function Dice({ value, isRolling, isWinner, isLoser, isPending, s
 
   return (
     <div
-      className={`relative ${sizeClasses} flex items-center justify-center transition-all duration-300 select-none shadow-lg ${
+      className={`relative ${sizeClasses} flex items-center justify-center transition-all duration-300 select-none shadow-md ${
         isRolling
-          ? "animate-bounce scale-110 bg-gradient-to-br from-amber-100 to-amber-300 ring-2 ring-amber-400"
+          ? "animate-bounce scale-105 bg-gradient-to-br from-amber-100 to-amber-300 ring-2 ring-amber-400"
           : isWinner
-          ? "bg-white ring-2 ring-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.7)] scale-105"
+          ? "bg-white ring-2 ring-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)] scale-105"
           : isLoser
           ? "bg-slate-700/80 opacity-60 scale-95"
           : "bg-white text-gray-900"
       }`}
       style={{
         boxShadow: isWinner
-          ? '0 0 16px rgba(52, 211, 153, 0.7), inset 0 2px 4px rgba(255,255,255,0.8)'
+          ? '0 0 12px rgba(52, 211, 153, 0.7), inset 0 1px 3px rgba(255,255,255,0.8)'
           : isRolling
-          ? '0 0 16px rgba(245, 158, 11, 0.6)'
-          : '0 4px 10px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.9)'
+          ? '0 0 12px rgba(245, 158, 11, 0.6)'
+          : '0 2px 6px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.9)'
       }}
     >
       <div className="w-full h-full grid grid-cols-3 grid-rows-3 items-center justify-items-center">

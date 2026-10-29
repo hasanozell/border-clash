@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { Globe, Swords, Trophy } from 'lucide-react';
+import { Globe, Swords, Trophy, Bookmark, Check } from 'lucide-react';
 
 import MapViewer from './components/MapViewer';
 import BattleCard from './components/BattleCard';
@@ -13,8 +13,28 @@ import borderGraph from './data/borderGraph.json';
 import { calculateMultiplier, executeDiceClash } from './utils/battleEngine';
 import { sound } from './utils/sound';
 
+const STORAGE_KEY = 'border_clash_save_v1';
+
 export default function App() {
+  // Load saved campaign or initialize fresh state
   const initializeState = useCallback(() => {
+    try {
+      const savedData = localStorage.getItem(STORAGE_KEY);
+      if (savedData) {
+        const parsed = JSON.parse(savedData);
+        if (parsed.factions && parsed.conquestMap && Object.keys(parsed.factions).length > 0) {
+          return {
+            factions: parsed.factions,
+            conquestMap: parsed.conquestMap,
+            episode: parsed.episode || 1,
+            isResumed: true
+          };
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to load saved state, using default:', err);
+    }
+
     const initFactions = {};
     const initConquest = {};
 
@@ -34,11 +54,17 @@ export default function App() {
       };
     });
 
-    return { factions: initFactions, conquestMap: initConquest };
+    return { factions: initFactions, conquestMap: initConquest, episode: 1, isResumed: false };
   }, []);
 
-  const [{ factions, conquestMap }, setGameState] = useState(initializeState);
-  const [episode, setEpisode] = useState(1);
+  const [initialData] = useState(initializeState);
+  const [{ factions, conquestMap }, setGameState] = useState({
+    factions: initialData.factions,
+    conquestMap: initialData.conquestMap
+  });
+  const [episode, setEpisode] = useState(initialData.episode || 1);
+  const [isResumedBanner, setIsResumedBanner] = useState(initialData.isResumed);
+  const [isSavedJustNow, setIsSavedJustNow] = useState(false);
 
   // Flow State Machine:
   // 'idle' -> 'country_selected' -> 'cycling_neighbors' -> 'defender_chosen' -> 'rolling_1' -> 'rolling_2' -> 'rolling_3' -> 'multiplier' -> 'winner'
@@ -77,6 +103,29 @@ export default function App() {
   const rollIntervalRef = useRef(null);
 
   const remainingCount = Object.keys(factions).length;
+
+  // Save campaign helper
+  const saveCampaign = useCallback((facs, map, ep) => {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          factions: facs,
+          conquestMap: map,
+          episode: ep,
+          timestamp: Date.now()
+        })
+      );
+      setIsSavedJustNow(true);
+      setTimeout(() => setIsSavedJustNow(false), 2000);
+    } catch (err) {
+      console.error('Failed to save campaign:', err);
+    }
+  }, []);
+
+  const handleManualSave = () => {
+    saveCampaign(factions, conquestMap, episode);
+  };
 
   const getForeignNeighbors = useCallback((aId, currentFactions, currentConquest) => {
     const aFaction = currentFactions[aId];
@@ -146,7 +195,7 @@ export default function App() {
     sound.playPointDing(true);
 
     if (isPlayingRef.current) {
-      const waitTime = Math.max(900, 1800 / speedRef.current);
+      const waitTime = Math.max(800, 1600 / speedRef.current);
       timerRef.current = setTimeout(() => {
         handleStartBattle();
       }, waitTime);
@@ -205,7 +254,7 @@ export default function App() {
 
   }, [attackerId, candidateNeighbors, factions, conquestMap, getForeignNeighbors]);
 
-  // STEP 3: SEQUENTIAL DICE ROLLS (Round 1 ➔ Round 2 ➔ Round 3 ➔ Multiplier ➔ Winner)
+  // STEP 3: SEQUENTIAL DICE ROLLS (Round 1 -> Round 2 -> Round 3 -> Multiplier -> Winner)
   const startSequentialDiceClash = (aId, dId) => {
     const aFaction = factions[aId];
     const dFaction = factions[dId];
@@ -216,8 +265,8 @@ export default function App() {
     );
 
     const spd = speedRef.current;
-    const rollDuration = Math.max(300, 850 / spd);
-    const roundPause = Math.max(250, 550 / spd);
+    const rollDuration = Math.max(300, 800 / spd);
+    const roundPause = Math.max(250, 500 / spd);
 
     // Round 1
     setFlowStep('rolling_1');
@@ -228,20 +277,24 @@ export default function App() {
       setRollingDice(prev => ({
         ...prev,
         attacker: [Math.floor(Math.random() * 6) + 1, prev.attacker[1], prev.attacker[2]],
-        defender: [Math.floor(Math.random() * 6) + 1, prev.defender[1], prev.defender[2]],
+        defender: [Math.floor(Math.random() * 6) + 1, prev.defender[1], prev.defender[2]]
       }));
-    }, 70);
+    }, 60);
 
-    // Reveal Round 1
     timerRef.current = setTimeout(() => {
-      if (rollIntervalRef.current) clearInterval(rollIntervalRef.current);
+      clearInterval(rollIntervalRef.current);
       const r1 = battleResult.rounds[0];
+      setRollingDice(prev => ({
+        ...prev,
+        attacker: [r1.attackerDie, prev.attacker[1], prev.attacker[2]],
+        defender: [r1.defenderDie, prev.defender[1], prev.defender[2]]
+      }));
       setRevealedRounds([r1]);
 
-      let aRaw = r1.winner === 'attacker' ? r1.points : 0;
-      let dRaw = r1.winner === 'defender' ? r1.points : 0;
-      setAttackerRawPoints(aRaw);
-      setDefenderRawPoints(dRaw);
+      let curA = r1.winner === 'attacker' ? r1.points : 0;
+      let curD = r1.winner === 'defender' ? r1.points : 0;
+      setAttackerRawPoints(curA);
+      setDefenderRawPoints(curD);
       sound.playPointDing(r1.winner === 'attacker');
 
       // Round 2
@@ -253,20 +306,24 @@ export default function App() {
           setRollingDice(prev => ({
             ...prev,
             attacker: [prev.attacker[0], Math.floor(Math.random() * 6) + 1, prev.attacker[2]],
-            defender: [prev.defender[0], Math.floor(Math.random() * 6) + 1, prev.defender[2]],
+            defender: [prev.defender[0], Math.floor(Math.random() * 6) + 1, prev.defender[2]]
           }));
-        }, 70);
+        }, 60);
 
-        // Reveal Round 2
         timerRef.current = setTimeout(() => {
-          if (rollIntervalRef.current) clearInterval(rollIntervalRef.current);
+          clearInterval(rollIntervalRef.current);
           const r2 = battleResult.rounds[1];
-          setRevealedRounds([r1, r2]);
+          setRollingDice(prev => ({
+            ...prev,
+            attacker: [prev.attacker[0], r2.attackerDie, prev.attacker[2]],
+            defender: [prev.defender[0], r2.defenderDie, prev.defender[2]]
+          }));
+          setRevealedRounds(prev => [...prev, r2]);
 
-          if (r2.winner === 'attacker') aRaw += r2.points;
-          if (r2.winner === 'defender') dRaw += r2.points;
-          setAttackerRawPoints(aRaw);
-          setDefenderRawPoints(dRaw);
+          if (r2.winner === 'attacker') curA += r2.points;
+          if (r2.winner === 'defender') curD += r2.points;
+          setAttackerRawPoints(curA);
+          setDefenderRawPoints(curD);
           sound.playPointDing(r2.winner === 'attacker');
 
           // Round 3
@@ -278,44 +335,58 @@ export default function App() {
               setRollingDice(prev => ({
                 ...prev,
                 attacker: [prev.attacker[0], prev.attacker[1], Math.floor(Math.random() * 6) + 1],
-                defender: [prev.defender[0], prev.defender[1], Math.floor(Math.random() * 6) + 1],
+                defender: [prev.defender[0], prev.defender[1], Math.floor(Math.random() * 6) + 1]
               }));
-            }, 70);
+            }, 60);
 
-            // Reveal Round 3
             timerRef.current = setTimeout(() => {
-              if (rollIntervalRef.current) clearInterval(rollIntervalRef.current);
+              clearInterval(rollIntervalRef.current);
               const r3 = battleResult.rounds[2];
-              setRevealedRounds([r1, r2, r3]);
+              setRollingDice(prev => ({
+                ...prev,
+                attacker: [prev.attacker[0], prev.attacker[1], r3.attackerDie],
+                defender: [prev.defender[0], prev.defender[1], r3.defenderDie]
+              }));
+              setRevealedRounds(prev => [...prev, r3]);
 
-              if (r3.winner === 'attacker') aRaw += r3.points;
-              if (r3.winner === 'defender') dRaw += r3.points;
-              setAttackerRawPoints(aRaw);
-              setDefenderRawPoints(dRaw);
+              if (r3.winner === 'attacker') curA += r3.points;
+              if (r3.winner === 'defender') curD += r3.points;
+              setAttackerRawPoints(curA);
+              setDefenderRawPoints(curD);
               sound.playPointDing(r3.winner === 'attacker');
 
-              // Decimal Multiplier Calculation Step
+              // Decimal Multiplier Reveal
+              const multDelay = Math.max(300, 700 / spd);
               timerRef.current = setTimeout(() => {
                 setFlowStep('multiplier');
                 setFinalAttackerPoints(battleResult.finalAttackerPoints);
                 setFinalDefenderPoints(battleResult.finalDefenderPoints);
                 sound.playPointDing(true);
 
-                // Winner announcement
+                // Winner Announcement
+                const winDelay = Math.max(400, 900 / spd);
                 timerRef.current = setTimeout(() => {
                   setFlowStep('winner');
                   setWinner(battleResult.winner);
                   sound.playVictory();
-                  confetti({ particleCount: 90, spread: 75 });
 
-                  // Execute Conquest & Return to World Map
+                  try {
+                    confetti({
+                      particleCount: 50,
+                      spread: 60,
+                      origin: { y: 0.7 }
+                    });
+                  } catch (e) {}
+
+                  // Execute conquest & zoom out
+                  const conquestDelay = Math.max(800, 1800 / spd);
                   timerRef.current = setTimeout(() => {
                     executeConquestAndReset(aId, dId, battleResult.winner);
-                  }, Math.max(1200, 2200 / spd));
+                  }, conquestDelay);
 
-                }, Math.max(600, 1200 / spd));
+                }, winDelay);
 
-              }, Math.max(500, 1000 / spd));
+              }, multDelay);
 
             }, rollDuration);
 
@@ -328,10 +399,14 @@ export default function App() {
     }, rollDuration);
   };
 
-  // STEP 4: CONQUEST & RETURN CAMERA TO WORLD VIEW
+  // STEP 4: CONQUEST & RETURN CAMERA TO WORLD VIEW & AUTO-SAVE
   const executeConquestAndReset = (aId, dId, battleWinner) => {
     const winnerId = battleWinner === 'attacker' ? aId : dId;
     const loserId = battleWinner === 'attacker' ? dId : aId;
+
+    let nextFactions;
+    let nextConquest;
+    let nextEpisode = episode + 1;
 
     setGameState(prev => {
       const prevFactions = { ...prev.factions };
@@ -362,13 +437,21 @@ export default function App() {
 
       delete prevFactions[loserId];
 
+      nextFactions = prevFactions;
+      nextConquest = prevConquest;
+
       return {
         factions: prevFactions,
         conquestMap: prevConquest
       };
     });
 
-    setEpisode(ep => ep + 1);
+    setEpisode(nextEpisode);
+
+    // Auto-save the campaign after every clash!
+    if (nextFactions && nextConquest) {
+      saveCampaign(nextFactions, nextConquest, nextEpisode);
+    }
 
     setViewMode('world');
     setFlowStep('idle');
@@ -376,7 +459,7 @@ export default function App() {
     setHighlightedNeighborId(null);
 
     if (isPlayingRef.current) {
-      const waitTime = Math.max(1200, 2600 / speedRef.current);
+      const waitTime = Math.max(1000, 2200 / speedRef.current);
       timerRef.current = setTimeout(() => {
         handleSelectCountry();
       }, waitTime);
@@ -402,8 +485,33 @@ export default function App() {
     isPlayingRef.current = false;
     if (timerRef.current) clearTimeout(timerRef.current);
     if (rollIntervalRef.current) clearInterval(rollIntervalRef.current);
-    setGameState(initializeState());
+
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+
+    const initFactions = {};
+    const initConquest = {};
+
+    Object.entries(countryMetadata).forEach(([id, meta]) => {
+      const normId = String(id).padStart(3, '0');
+      initConquest[normId] = normId;
+      initFactions[normId] = {
+        id: normId,
+        name: meta.name,
+        code: meta.code,
+        territories: [normId],
+        population: meta.pop || 1000000,
+        area: meta.area || 10000,
+        wins: 0,
+        losses: 0,
+        multiplier: calculateMultiplier(meta.pop || 1000000)
+      };
+    });
+
+    setGameState({ factions: initFactions, conquestMap: initConquest });
     setEpisode(1);
+    setIsResumedBanner(false);
     setAttackerId(null);
     setDefenderId(null);
     setCandidateNeighbors([]);
@@ -440,43 +548,57 @@ export default function App() {
   const defenderFaction = defenderId ? factions[defenderId] : null;
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-white flex flex-col items-center justify-between p-2 sm:p-5 select-none font-sans">
-      {/* Top Header */}
-      <header className="w-full max-w-5xl flex items-center justify-between gap-2 pb-2 border-b border-slate-800/80 mb-2 sm:mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-black flex-shrink-0">
-            <Swords className="w-4 h-4" />
+    <div className="h-[100dvh] max-h-[100dvh] w-full bg-[#07090e] text-white flex flex-col justify-between p-1.5 sm:p-3 select-none font-sans overflow-hidden">
+      {/* Top Header (Ultra sleek & compact) */}
+      <header className="flex-shrink-0 w-full max-w-5xl mx-auto flex items-center justify-between gap-1 pb-1 border-b border-slate-800/80">
+        <div className="flex items-center gap-1.5">
+          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center text-slate-950 font-black flex-shrink-0 shadow-sm">
+            <Swords className="w-3.5 h-3.5" />
           </div>
           <div>
-            <h1 className="text-sm sm:text-base md:text-lg font-black tracking-tight text-white flex items-center gap-1.5">
-              BORDER CLASH <span className="text-amber-400 text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30">WARS</span>
+            <h1 className="text-xs sm:text-sm font-black tracking-tight text-white flex items-center gap-1">
+              BORDER CLASH <span className="text-amber-400 text-[8px] font-bold px-1 rounded bg-amber-500/10 border border-amber-500/30">WARS</span>
             </h1>
           </div>
         </div>
 
         {/* Global Stats Badges */}
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-bold">
-            <Globe className="w-3 h-3 text-sky-400" />
+        <div className="flex items-center gap-1 sm:gap-1.5">
+          {isResumedBanner && (
+            <div className="hidden xs:flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/60 border border-emerald-500/40 text-[9px] font-bold text-emerald-300">
+              <Check className="w-2.5 h-2.5" />
+              <span>Resumed</span>
+            </div>
+          )}
+
+          {isSavedJustNow && (
+            <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-[9px] font-bold text-emerald-300 animate-pulse">
+              <Bookmark className="w-2.5 h-2.5" />
+              <span>Saved!</span>
+            </div>
+          )}
+
+          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-[10px] font-bold">
+            <Globe className="w-2.5 h-2.5 text-sky-400" />
             <span>Left: <strong className="text-amber-400">{remainingCount}</strong></span>
           </div>
 
-          <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-bold">
-            <Trophy className="w-3 h-3 text-amber-400" />
+          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-[10px] font-bold">
+            <Trophy className="w-2.5 h-2.5 text-amber-400" />
             <span>Ep: <strong className="text-white">#{episode}</strong></span>
           </div>
         </div>
       </header>
 
-      {/* Main Content Area */}
-      <main className={`w-full transition-all duration-300 flex flex-col items-center justify-center mb-3 sm:mb-4 ${
-        isVerticalMode ? 'max-w-[420px]' : 'max-w-5xl'
+      {/* Main Content Area (Auto-fits 100% viewport, NO scrolling) */}
+      <main className={`flex-1 min-h-0 w-full mx-auto my-1 flex flex-col items-center justify-between overflow-hidden ${
+        isVerticalMode ? 'max-w-[440px]' : 'max-w-5xl'
       }`}>
         {isVerticalMode ? (
-          /* 9:16 Clean Reels Layout (Mobile Optimized) */
-          <div className="w-full bg-[#080d1c] border border-slate-800 sm:border-2 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col">
-            {/* Top Half: Interactive Map */}
-            <div className="relative w-full h-[240px] xs:h-[260px] sm:h-[280px] bg-[#060913]">
+          /* Mobile / 9:16 Vertical Screen (Perfect Single-Screen Fit) */
+          <div className="w-full h-full flex flex-col justify-between overflow-hidden bg-[#080d1c] border border-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-1 sm:p-1.5">
+            {/* Top: Auto-expanding Interactive Map */}
+            <div className="flex-1 min-h-[140px] w-full relative rounded-lg sm:rounded-xl overflow-hidden bg-[#060913]">
               <MapViewer
                 conquestMap={conquestMap}
                 factions={factions}
@@ -490,8 +612,8 @@ export default function App() {
               />
             </div>
 
-            {/* Bottom Half: Battle Card or Leaderboard */}
-            <div className="p-2 sm:p-2.5 bg-[#080d1c]">
+            {/* Bottom: Compact Battle Card or Leaderboard */}
+            <div className="flex-shrink-0 w-full mt-1">
               {flowStep === 'idle' && viewMode === 'world' ? (
                 <Leaderboard
                   factions={factions}
@@ -519,10 +641,10 @@ export default function App() {
             </div>
           </div>
         ) : (
-          /* Widescreen Layout */
-          <div className="w-full grid grid-cols-1 lg:grid-cols-[1.3fr,1fr] gap-3.5 items-stretch">
+          /* Desktop / Tablet Widescreen Layout */
+          <div className="w-full h-full grid grid-cols-1 lg:grid-cols-[1.3fr,1fr] gap-2.5 items-stretch overflow-hidden">
             {/* Left: Map */}
-            <div className="h-[460px] bg-[#080d1c] rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
+            <div className="h-full bg-[#080d1c] rounded-2xl overflow-hidden shadow-xl border border-slate-800">
               <MapViewer
                 conquestMap={conquestMap}
                 factions={factions}
@@ -537,7 +659,7 @@ export default function App() {
             </div>
 
             {/* Right: Battle Arena & Stats */}
-            <div className="flex flex-col justify-between gap-3">
+            <div className="flex flex-col justify-between gap-2 overflow-y-auto pr-1">
               <BattleCard
                 attacker={attackerFaction}
                 defender={defenderFaction}
@@ -554,7 +676,7 @@ export default function App() {
                 onSelectCountry={() => handleSelectCountry()}
               />
 
-              <div className="bg-slate-900/60 p-2.5 rounded-2xl border border-slate-800">
+              <div className="bg-slate-900/60 p-1.5 rounded-xl border border-slate-800">
                 <Leaderboard
                   factions={factions}
                   episode={episode}
@@ -568,7 +690,7 @@ export default function App() {
       </main>
 
       {/* Sticky Bottom Control Bar (Mobile-First Safe Area) */}
-      <footer className="sticky bottom-1 sm:bottom-2 z-40 w-full max-w-md lg:max-w-5xl shadow-2xl">
+      <footer className="flex-shrink-0 w-full max-w-[440px] lg:max-w-5xl mx-auto">
         <Controls
           flowStep={flowStep}
           onSelectCountry={() => handleSelectCountry()}
@@ -576,6 +698,8 @@ export default function App() {
           isPlaying={isPlaying}
           onTogglePlay={handleTogglePlay}
           onReset={handleReset}
+          onSave={handleManualSave}
+          isSavedJustNow={isSavedJustNow}
           speed={speed}
           onChangeSpeed={handleChangeSpeed}
           isMuted={isMuted}

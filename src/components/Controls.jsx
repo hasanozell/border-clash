@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Pause, Swords, RotateCcw, Volume2, VolumeX, Maximize2, Sliders, Smartphone, Monitor, Dices } from 'lucide-react';
+import { Play, Pause, Swords, RotateCcw, Volume2, VolumeX, Maximize2, Sliders, Smartphone, Monitor, Dices, Bookmark, Check } from 'lucide-react';
 
 export default function Controls({
   flowStep, // 'idle' | 'country_selected' | 'cycling_neighbors' | 'defender_chosen' | 'rolling_1' | 'rolling_2' | 'rolling_3' | 'multiplier' | 'winner'
@@ -8,6 +8,8 @@ export default function Controls({
   isPlaying,
   onTogglePlay,
   onReset,
+  onSave,
+  isSavedJustNow,
   speed,
   onChangeSpeed,
   isMuted,
@@ -21,21 +23,27 @@ export default function Controls({
   const isBusy =
     flowStep.startsWith('rolling') || flowStep === 'cycling_neighbors' || flowStep === 'multiplier' || flowStep === 'winner';
 
+  const handleConfirmReset = () => {
+    if (window.confirm('Reset world simulation? All conquered empires will return to original borders.')) {
+      onReset();
+    }
+  };
+
   return (
     <div
-      className="w-full bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-2xl flex flex-col gap-2"
-      style={{ paddingBottom: 'max(0.6rem, env(safe-area-inset-bottom))' }}
+      className="w-full bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-xl sm:rounded-2xl p-1.5 sm:p-2.5 shadow-2xl flex flex-col gap-1.5"
+      style={{ paddingBottom: 'max(0.4rem, env(safe-area-inset-bottom))' }}
     >
       {/* Row 1: Primary Action & Auto Play */}
-      <div className="flex items-center gap-2 w-full">
+      <div className="flex items-center gap-1.5 w-full">
         {flowStep === 'country_selected' ? (
           /* Step 2: START CLASH */
           <button
             onClick={onStartBattle}
             disabled={isBusy}
-            className="flex-1 py-2.5 sm:py-3 px-4 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-white shadow-lg shadow-rose-500/30 active:scale-98 transition-all"
+            className="flex-1 py-2 sm:py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-white shadow-md shadow-rose-500/20 active:scale-98 transition-all"
           >
-            <Swords className="w-4 h-4 animate-bounce" />
+            <Swords className="w-3.5 h-3.5 animate-bounce" />
             <span>Start Clash ⚔️</span>
           </button>
         ) : (
@@ -43,36 +51,36 @@ export default function Controls({
           <button
             onClick={onSelectCountry}
             disabled={isBusy}
-            className={`flex-1 py-2.5 sm:py-3 px-4 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-98 shadow-lg ${
+            className={`flex-1 py-2 sm:py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all active:scale-98 shadow-md ${
               isBusy
                 ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                : 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 shadow-amber-500/30'
+                : 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 shadow-amber-500/20'
             }`}
           >
-            <Dices className={`w-4 h-4 ${isBusy ? 'animate-spin' : ''}`} />
-            <span>{isBusy ? 'Clash in Progress...' : '🎲 Select Country'}</span>
+            <Dices className={`w-3.5 h-3.5 ${isBusy ? 'animate-spin' : ''}`} />
+            <span>{isBusy ? 'Clashing...' : '🎲 Select Country'}</span>
           </button>
         )}
 
         {/* Auto Play / Loop Button */}
         <button
           onClick={onTogglePlay}
-          className={`px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-all active:scale-95 shadow-md flex-shrink-0 ${
+          className={`px-3 py-2 sm:py-2.5 rounded-xl font-bold text-xs flex items-center gap-1 transition-all active:scale-95 shadow-sm flex-shrink-0 ${
             isPlaying
-              ? 'bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/30'
-              : 'bg-emerald-500 hover:bg-emerald-600 text-slate-950 shadow-emerald-500/30'
+              ? 'bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/20'
+              : 'bg-emerald-500 hover:bg-emerald-600 text-slate-950 shadow-emerald-500/20'
           }`}
           title="Auto-play simulation loop"
         >
           {isPlaying ? (
             <>
-              <Pause className="w-4 h-4 fill-white" />
-              <span className="hidden xs:inline">Pause</span>
+              <Pause className="w-3.5 h-3.5 fill-white" />
+              <span className="text-[11px]">Pause</span>
             </>
           ) : (
             <>
-              <Play className="w-4 h-4 fill-slate-950 ml-0.5" />
-              <span className="hidden xs:inline">Auto</span>
+              <Play className="w-3.5 h-3.5 fill-slate-950 ml-0.5" />
+              <span className="text-[11px]">Auto</span>
             </>
           )}
         </button>
@@ -80,19 +88,33 @@ export default function Controls({
         {/* Speed Selector */}
         <button
           onClick={onChangeSpeed}
-          className="px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-black font-mono transition active:scale-95 border border-slate-700 flex-shrink-0"
-          title="Animation Speed"
+          className="px-2 py-2 sm:py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-black font-mono transition active:scale-95 border border-slate-700 flex-shrink-0"
+          title="Simulation Speed"
         >
           {speed}x
         </button>
       </div>
 
       {/* Row 2: Secondary Tool Strip */}
-      <div className="flex items-center justify-between gap-1.5 sm:gap-2 w-full pt-1 border-t border-slate-800/60">
+      <div className="flex items-center justify-between gap-1 w-full pt-1 border-t border-slate-800/60">
+        {/* Save Campaign */}
+        <button
+          onClick={onSave}
+          className={`flex-1 py-1 px-1.5 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 transition active:scale-95 border border-slate-700/80 truncate ${
+            isSavedJustNow
+              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+              : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+          }`}
+          title="Save Simulation Progress"
+        >
+          {isSavedJustNow ? <Check className="w-3 h-3 text-emerald-400 flex-shrink-0" /> : <Bookmark className="w-3 h-3 text-amber-400 flex-shrink-0" />}
+          <span className="truncate">{isSavedJustNow ? 'Saved!' : 'Save'}</span>
+        </button>
+
         {/* Custom Match Picker */}
         <button
           onClick={onOpenCustomMatch}
-          className="flex-1 py-1.5 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-[11px] font-bold flex items-center justify-center gap-1 transition active:scale-95 border border-slate-700/80 truncate"
+          className="flex-1 py-1 px-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-[10px] font-bold flex items-center justify-center gap-1 transition active:scale-95 border border-slate-700/80 truncate"
           title="Custom Country & Neighbor Matchup"
         >
           <Sliders className="w-3 h-3 flex-shrink-0" />
@@ -102,9 +124,9 @@ export default function Controls({
         {/* View Mode (Zoom vs World) */}
         <button
           onClick={onToggleViewMode}
-          className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1 active:scale-95 border border-slate-700/80 truncate ${
+          className={`flex-1 py-1 px-1.5 rounded-lg text-[10px] font-bold transition flex items-center justify-center gap-1 active:scale-95 border border-slate-700/80 truncate ${
             viewMode === 'world'
-              ? 'bg-sky-500 text-slate-950 font-black'
+              ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
               : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
           }`}
           title="Toggle World / Focus View"
@@ -116,7 +138,7 @@ export default function Controls({
         {/* 9:16 Vertical vs Widescreen (Desktop/Tablet) */}
         <button
           onClick={onToggleVerticalMode}
-          className={`hidden sm:flex flex-1 py-1.5 px-2 rounded-lg text-[11px] font-bold transition items-center justify-center gap-1 active:scale-95 border border-slate-700/80 truncate ${
+          className={`hidden sm:flex flex-1 py-1 px-1.5 rounded-lg text-[10px] font-bold transition items-center justify-center gap-1 active:scale-95 border border-slate-700/80 truncate ${
             isVerticalMode
               ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
               : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
@@ -130,19 +152,19 @@ export default function Controls({
         {/* Sound Toggle */}
         <button
           onClick={onToggleMute}
-          className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95 border border-slate-700/80 flex-shrink-0"
+          className="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95 border border-slate-700/80 flex-shrink-0"
           title={isMuted ? 'Unmute' : 'Mute'}
         >
-          {isMuted ? <VolumeX className="w-3.5 h-3.5 text-rose-400" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+          {isMuted ? <VolumeX className="w-3 h-3 text-rose-400" /> : <Volume2 className="w-3 h-3 text-emerald-400" />}
         </button>
 
         {/* Reset */}
         <button
-          onClick={onReset}
-          className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-rose-950/40 text-rose-400 flex items-center justify-center transition active:scale-95 border border-slate-700/80 flex-shrink-0"
+          onClick={handleConfirmReset}
+          className="w-7 h-7 rounded-lg bg-slate-800 hover:bg-rose-950/40 text-rose-400 flex items-center justify-center transition active:scale-95 border border-slate-700/80 flex-shrink-0"
           title="Reset Simulation"
         >
-          <RotateCcw className="w-3.5 h-3.5" />
+          <RotateCcw className="w-3 h-3" />
         </button>
       </div>
     </div>

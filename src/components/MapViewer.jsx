@@ -138,6 +138,8 @@ export default function MapViewer({
     return () => cancelAnimationFrame(animId);
   }, [targetViewBox]);
 
+  const isFocusMode = viewMode === 'zoom' && Boolean(attackerId);
+
   // Compute paths, bounding boxes, and flags
   const renderedFeatures = useMemo(() => {
     return features.map(feature => {
@@ -156,7 +158,6 @@ export default function MapViewer({
       const cx = (minX + maxX) / 2;
       const cy = (minY + maxY) / 2;
 
-      // Expand flag bounding box to a full square centered on the country
       const dim = Math.max(bw, bh) * 1.15;
       const imgX = cx - dim / 2;
       const imgY = cy - dim / 2;
@@ -192,7 +193,7 @@ export default function MapViewer({
       >
         <defs>
           <pattern id="ocean-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-            <circle cx="12" cy="12" r="0.8" fill="#1e293b" opacity="0.3" />
+            <circle cx="12" cy="12" r="0.8" fill="#1e293b" opacity="0.25" />
           </pattern>
 
           {renderedFeatures.map(item => (
@@ -206,13 +207,33 @@ export default function MapViewer({
         <rect x={-800} y={-800} width={width + 1600} height={height + 1600} fill="#060913" />
         <rect x={-800} y={-800} width={width + 1600} height={height + 1600} fill="url(#ocean-grid)" />
 
-        {/* Flag-Filled Countries */}
+        {/* Flag-Filled Countries with Spotlight Brightness */}
         {renderedFeatures.map(item => {
           const flagUrl = `https://flagcdn.com/w320/${item.flagCode}.png`;
 
+          // Dynamic brightness & contrast:
+          // Active attacker / roulette-cycling neighbor shines bright like a spotlight!
+          // Inactive background countries slightly dimmed to make active countries pop naturally
+          const brightnessFilter = item.isHighlighted
+            ? 'brightness(1.5) contrast(1.15) saturate(1.1)'
+            : item.isAttacker
+            ? 'brightness(1.28) contrast(1.1) saturate(1.05)'
+            : item.isDefender
+            ? 'brightness(1.22) contrast(1.08)'
+            : isFocusMode
+            ? 'brightness(0.68) saturate(0.85)'
+            : 'brightness(1.0)';
+
           return (
-            <g key={item.id} clipPath={`url(#clip-${item.id})`}>
-              {/* Clean land background */}
+            <g
+              key={item.id}
+              clipPath={`url(#clip-${item.id})`}
+              style={{
+                filter: brightnessFilter,
+                transition: 'filter 180ms ease-out'
+              }}
+            >
+              {/* Land background */}
               <path d={item.d} fill="#141a29" />
 
               {/* Crisp Flag Image */}
@@ -224,28 +245,40 @@ export default function MapViewer({
                 height={item.dim}
                 preserveAspectRatio="xMidYMid slice"
               />
+
+              {/* Luminous soft light pulse on the neighbor currently visited during roulette */}
+              {item.isHighlighted && (
+                <path d={item.d} fill="#ffffff" fillOpacity="0.25" />
+              )}
+
+              {/* Gentle warm ambient glow on the attacking country */}
+              {item.isAttacker && (
+                <path d={item.d} fill="#fbbf24" fillOpacity="0.1" />
+              )}
+
+              {/* Gentle cool ambient glow on the locked defending country */}
+              {item.isDefender && (
+                <path d={item.d} fill="#38bdf8" fillOpacity="0.1" />
+              )}
             </g>
           );
         })}
 
-        {/* Clean, Elegant Borders */}
+        {/* Clean, Non-Intrusive Borders (No artificial thick lines during roulette) */}
         {renderedFeatures.map(item => {
           let stroke = '#0a0f1d';
           let strokeWidth = 0.4;
-          let strokeOpacity = 0.7;
+          let strokeOpacity = 0.6;
 
-          if (item.isHighlighted) {
-            stroke = '#ffffff';
-            strokeWidth = 1.8;
-            strokeOpacity = 1;
-          } else if (item.isAttacker) {
-            stroke = '#fbbf24'; // Elegant gold
-            strokeWidth = 1.4;
-            strokeOpacity = 1;
+          // Subtle hairline border only to delineate the attacker / defender once locked
+          if (item.isAttacker) {
+            stroke = '#fbbf24';
+            strokeWidth = 0.8;
+            strokeOpacity = 0.85;
           } else if (item.isDefender) {
-            stroke = '#38bdf8'; // Clean cyan
-            strokeWidth = 1.4;
-            strokeOpacity = 1;
+            stroke = '#38bdf8';
+            strokeWidth = 0.8;
+            strokeOpacity = 0.85;
           }
 
           return (
@@ -258,7 +291,6 @@ export default function MapViewer({
               strokeOpacity={strokeOpacity}
               strokeLinejoin="round"
               strokeLinecap="round"
-              style={{ transition: 'stroke 150ms, stroke-width 150ms' }}
             />
           );
         })}
